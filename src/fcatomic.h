@@ -76,9 +76,9 @@ typedef int fc_atomic_int_t;
 #define fc_atomic_int_add(AI, V)	(OSAtomicAdd32Barrier ((V), &(AI)) - (V))
 
 #if SIZEOF_VOID_P == 8
-#define fc_atomic_ptr_get(P)		OSAtomicAdd64Barrier (0, (int64_t*)(P))
+#define fc_atomic_ptr_get(P)		(void *) OSAtomicAdd64Barrier (0, (int64_t*)(P))
 #elif SIZEOF_VOID_P == 4
-#define fc_atomic_ptr_get(P)		OSAtomicAdd32Barrier (0, (int32_t*)(P))
+#define fc_atomic_ptr_get(P)		(void *) OSAtomicAdd32Barrier (0, (int32_t*)(P))
 #else
 #error "SIZEOF_VOID_P not 4 or 8 (assumes CHAR_BIT is 8)"
 #endif
